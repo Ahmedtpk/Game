@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="OuterContainer">
+        <h1>
+            Rock Paper Scissors Game, First To 5 wins
+           </h1>
+           <h2>
+            choose your move:
+           </h2>
+           <div class="imgContainer" id="imgContainer">
+             <img onclick="chooseMove(event)" src="stein.jpg" alt="" id="stein">
+             <img  onclick="chooseMove(event)"src="saks.jpg" alt="" id="saks">
+             <img  onclick="chooseMove(event)"src="papir.jpg" alt="" id="papir">
+           </div>
+           <div id="chosenImgContainer" class="chosenImgContainer">
+              <img src="" alt="" id="chosenImg" class="chosenImg">
+              <img src="vs.jpg" alt="" class="chosenImg" id="vs">
+              <img src="" alt="" class="chosenImg" id="pcBilde">
+              <p class="move">You</p>
+              <p class="move"></p>
+              <p class="move">Computers</p>
+           </div>
+           <div id="scoreContainer" class="scoreContainer">
+            <p id="playerWin" class="playerWin"> You Win </p>
+            <p id="pcWin" class="pcWin">Pc Wins</p>
+            <p id="tie" class="tie"> Its a tie</p>
+            <p id="winnerTag" class="winnerTag"></p>
+            <div class="userScore">
+                <!-- <p>your total score is</p> -->
+                <p id="playerTotalScore"> </p>
+            </div>
+            <div class="PcScore">
+                <!-- <p>the computer total score is </p> -->
+                <p id="pcTotalScore">  </p>
+            </div>
+           </div>
+           <div class="hiddenEndGameContainer" id="endGameContainer">
+            <p id="gameOverTag" class="gameOverTag"></p>
+            <p id="tryAgainTag" class="tryAgainTag"> Do you want to try again?</p>
+            <div id="Buttoncontainer" class="Buttoncontainer">
+             <button class="yesButton" id="yesButton" onclick="startAgainYes()">Yes</button>
+             <button class="noButton" id="noButton" onclick="startAgainNo()">No</button>
+            </div>
+           </div>
+    </div>
+   
+
+</body>
+</html>
+
+<script>
+    let imgContainer = document.getElementById("imgContainer")
+    var saks = document.getElementById("saks")
+    let stein = document.getElementById("stein")
+    let papir = document.getElementById("papir")
+    let chosenImgContainer = document.getElementById("chosenImgContainer")
+    let chosenImg= document.getElementById("chosenImg")
+    let arrayOfChosenImg= document.getElementsByClassName("chosenImg")
+    let pcBilde = document.getElementById("pcBilde")
+    var theImgs = [ "saks.jpg","papir.jpg","stein.jpg" ];
+    let randomNumber
+    let playerWin = document.getElementById("playerWin")
+    let pcWin = document.getElementById("pcWin")
+    let tie = document.getElementById("tie")
+    let playerTotalScore= document.getElementById("playerTotalScore")
+    let pcTotalScore= document.getElementById("pcTotalScore")
+    let playerScoreCounter=0
+    let pcScoreCounter=0
+    let endGameContainer= document.getElementById("endGameContainer")
+    let winnerTag= document.getElementById("winnerTag")
+    let gameOverTag= document.getElementById("gameOverTag")
+    let yesButton= document.getElementById("yesButton")
+    let noButton= document.getElementById("noButton")
+    let scoreContainer = document.getElementById("scoreContainer")
+
+
+
+// console.log("stein.jpg")
+    // arrayOfChosenImg[2].classList.add("ultraChosenImgContainer")
+
+    // stein.addEventListener("click", chooseMove(event))
+    // saks.addEventListener("click", chooseMove)
+    // papir.addEventListener("click", chooseMove)
+    function chooseMove(event){
+        chosenImgContainer.style.display = "flex"
+        scoreContainer.style.display = "flex"
+        randomNumber = Math.floor(Math.random() * (3) );
+        pcBilde.src = theImgs[randomNumber]
+        console.log(pcBilde)
+        console.log(theImgs[randomNumber])
+        console.log(event.target.src)
+        if (event.target.id=== "stein") {
+            chosenImg.src = event.target.src
+            for (let i = 0; i < arrayOfChosenImg.length; i++) {
+             arrayOfChosenImg[i].classList.add("ultraChosenImgContainer")
+            }
+            if (theImgs[randomNumber]=== "stein.jpg") {
+                // console.log("resulttie")
+                // tie.classList.add("resulttie")
+                winnerTag.innerHTML= "Its a tie"
+                playerTotalScore.innerHTML= "your total score is " + (playerScoreCounter)
+                pcTotalScore.innerHTML="the computer total score is " + pcScoreCounter
+            } else if (theImgs[randomNumber]=== "saks.jpg") {
+                // console.log("resulttie")
+                // playerWin.classList.add("resultplayerWin")
+                winnerTag.innerHTML=" You Win"
+                playerTotalScore.innerHTML= "your total score is " +(playerScoreCounter + 1)
+                playerScoreCounter= playerScoreCounter + 1
+                pcTotalScore.innerHTML= "The computer total score is " +  (pcScoreCounter)
+            } else if (theImgs[randomNumber]==="papir.jpg") {
+                // console.log("resulttie")
+                // pcWin.classList.add("resultpcWin")
+                winnerTag.innerHTML="The pc wins"
+                playerTotalScore.innerHTML= "Your total score is " + playerScoreCounter
+                pcTotalScore.innerHTML= "The computer total score is " + (pcScoreCounter + 1)
+                pcScoreCounter= pcScoreCounter + 1
+
+            }
+        } 
+        else if(event.target.id==="saks"){
+            chosenImg.src = event.target.src
+            for (let i = 0; i < arrayOfChosenImg.length; i++) {
+             arrayOfChosenImg[i].classList.add("ultraChosenImgContainer")
+            }
+            if (theImgs[randomNumber]=== "stein.jpg") {
+                // pcWin.classList.add("resultpcWin")
+                winnerTag.innerHTML= "The pc wins"
+                playerTotalScore.innerHTML= "your total score is " + playerScoreCounter
+                pcTotalScore.innerHTML= "the computer total score is " + (pcScoreCounter + 1)
+                pcScoreCounter= pcScoreCounter + 1
+
+            } else if (theImgs[randomNumber]=== "saks.jpg") {
+            //    tie.classList.add("resulttie")
+               winnerTag.innerHTML= "Its a tie"
+               playerTotalScore.innerHTML= "your total score is " + (playerScoreCounter)
+                pcTotalScore.innerHTML="the computer total score is " + pcScoreCounter
+            } else if (theImgs[randomNumber]==="papir.jpg") {
+                // playerWin.classList.add("resultplayerWin")
+                winnerTag.innerHTML="You Win"
+                playerTotalScore.innerHTML= "your total score is " +(playerScoreCounter + 1)
+                playerScoreCounter= playerScoreCounter + 1
+                pcTotalScore.innerHTML= "the computer total score is " +  (pcScoreCounter)
+            }
+            
+        } else if (event.target.id=== "papir"){
+            chosenImg.src = event.target.src
+            for (let i = 0; i < arrayOfChosenImg.length; i++) {
+             arrayOfChosenImg[i].classList.add("ultraChosenImgContainer")
+            }
+            if (theImgs[randomNumber]=== "stein.jpg") {
+                // playerWin.classList.add("resultplayerWin")
+                winnerTag.innerHTML="You Win"
+                playerTotalScore.innerHTML= "your total score is " +(playerScoreCounter + 1)
+                playerScoreCounter= playerScoreCounter + 1
+                pcTotalScore.innerHTML= "the computer total score is " +  (pcScoreCounter)
+            } else if (theImgs[randomNumber]=== "saks.jpg") {
+                // pcWin.classList.add("resultpcWin")
+                winnerTag.innerHTML="The pc wins"
+                playerTotalScore.innerHTML= "your total score is " + playerScoreCounter
+                pcTotalScore.innerHTML= "the computer total score is " + (pcScoreCounter + 1)
+                pcScoreCounter= pcScoreCounter + 1
+            } else if (theImgs[randomNumber]==="papir.jpg") {
+                // tie.classList.add("resulttie")
+                winnerTag.innerHTML= "Its a tie"
+                playerTotalScore.innerHTML= "your total score is " + (playerScoreCounter)
+                pcTotalScore.innerHTML="the computer total score is " + pcScoreCounter
+            }
+        }
+        console.log(playerScoreCounter)
+        console.log(pcScoreCounter)
+        gameOver()
+    }
+    function gameOver(){
+        if (playerScoreCounter === 5) {
+            console.log("working")
+            endGameContainer.classList.add("endGameContainer")
+            endGameContainer.classList.add("blokkheve")
+            imgContainer.classList.add("imgContainerBlokk")
+            gameOverTag.innerHTML= "Game over. You Win!"
+        } else if (pcScoreCounter===5) {
+            endGameContainer.classList.add("endGameContainer")
+            endGameContainer.classList.add("blokkheve")
+            imgContainer.classList.add("imgContainerBlokk")
+            gameOverTag.innerHTML= "Game over. You lose!"
+        }
+    }
+    function startAgainYes(){
+        imgContainer.classList.remove("imgContainerBlokk")
+        endGameContainer.classList.remove("blokkheve")
+        playerScoreCounter=0
+        pcScoreCounter=0
+        playerTotalScore.innerHTML= "your total score is " + (playerScoreCounter)
+        pcTotalScore.innerHTML="the computer total score is " + pcScoreCounter
+    }
+    function startAgainNo(){
+        
+        if (playerScoreCounter===5) {
+            console.log("test works")
+            location.href = "https://www.youtube.com/watch?v=PHgc8Q6qTjc";
+        } else if (pcScoreCounter===5) {
+            location.href ="https://www.youtube.com/watch?v=OeHtvmLupKw"
+        }
+    }
+    
+    
+    
+
+</script>
+<style>
+    .OuterContainer{
+        width: 100vw;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .imgContainer{
+        height: 120px;
+        width: 400px;
+        border: 2px solid black;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        
+    }
+    .imgContainer img:hover{
+        border: 2px solid green;
+    
+    
+    }
+    .imgContainer img{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        
+    }
+    .chosenImgContainer{
+        
+        width: 400px;
+        border: 2px solid black;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        align-items: center;
+        display: none;
+    } 
+    
+    /* .ChosenImgContainer img{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black; */
+    /* } */
+    .chosenImg{
+        display: none;
+    }
+    .ultraChosenImgContainer{
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        display: block;
+    }
+    .scoreContainer{
+        height: fit-content;
+        font-size: small;
+        width: 395px;
+        border: 2px solid black;
+        border-radius: 20px;
+        margin-bottom: 5px;
+        font-weight: bolder;
+        color: black;
+        font-size: medium;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+    .move{
+      width: 100px;
+      height: 100;
+      color: blue;
+      font-size: larger;
+    }
+    .playerWin{
+        display: none;
+    }
+    .pcWin{
+        display: none;
+    }
+    .tie{
+        display: none;
+    }
+    .resultplayerWin{
+        display: block;
+    }
+    .resultpcWin{
+        display: block;
+
+    }
+    .resulttie{
+        display: block;
+    }
+    .winnerTag{
+        color: red;
+        font-size: 20px;
+    }
+    .endGameContainer{
+        height: fit-content;
+        width: 395px;
+        border: solid 2px black;
+        display: flex;
+        flex-direction: column;
+        font-size: large;
+        font-weight: bolder ;
+        padding-left: 5px;
+        padding-bottom: 5px;
+    }
+    .gameOverTag{
+        display: flex;
+        align-self: center;
+        padding-right: 5px;
+    }
+    .tryAgainTag{
+        margin-top: 0px;
+    }
+    .hiddenEndGameContainer{
+        display: none;
+    }
+    .blokkheve{
+        display: block;
+    }
+    .imgContainerBlokk{
+        display: none;
+    }
+    .yesButton{
+        height: 50px;
+        width: 70px;
+        border-radius: 10px;
+        background-color: lightgreen;
+    }
+    .noButton{
+        height: 50px;
+        width: 70px;
+        border-radius: 10px;
+        background-color: lightcoral;
+    }
+    </style>
